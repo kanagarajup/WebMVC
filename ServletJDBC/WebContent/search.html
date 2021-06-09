@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html><head><meta charset="ISO-8859-1">
+<title>City Suggest</title>
+<script type="text/javascript">
+var req;
+function sendRequest(cname)
+{if (window.XMLHttpRequest) {req = new XMLHttpRequest( );}
+else if (window.ActiveXObject){req = new ActiveXObject("Microsoft.XMLHTTP");}
+req.onreadystatechange = function(){
+		if (req.readyState==4) 
+		{if (req.status == 200) {	
+		document.getElementById("city_suggest").innerHTML = req.responseText;
+		}	}	}
+req.open("GET","NameSuggest?city_n="+cname, true);//send request to server
+req.send(null);
+}
+</script>
+</head><body>
+	Customer Name:
+	<input type="text" name="city_name" onkeyup="sendRequest(this.value)" />
+	<p>
+		<strong>Suggestions:</strong>
+	</p>
+	<div id="city_suggest"></div>
+</body>
+</html>
